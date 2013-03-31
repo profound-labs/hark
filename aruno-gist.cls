@@ -142,7 +142,7 @@ outer=15mm
 %% Hyperref
 %% ========
 
-\usepackage{hyperref}
+\RequirePackage{hyperref}
 \hypersetup{
   colorlinks=true,
   unicode=true,
@@ -151,10 +151,25 @@ outer=15mm
   filecolor=textbody,
   urlcolor=textbody
 }
-\usepackage[
+\RequirePackage[
   open,
   openlevel=2
 ]{bookmark}
+
+% memoir's more allowing penalties
+\midsloppy
+
+%% Make hyphenation less frequent
+%% WARNING: there will be more underfull lines, and some very streched
+%% lines. Check the log file for underfull warnings.
+
+\lefthyphenmin=3
+\righthyphenmin=3
+
+\hyphenpenalty=600
+\exhyphenpenalty=50
+\doublehyphendemerits=900
+\brokenpenalty=990
 
 %% =========
 %% Penalties

@@ -97,6 +97,7 @@
 % \setlength{\vleftmargin}{2em}
 
 \newcommand{\smaller}{\@setfontsize\smaller{9}{11}}
+\newcommand{\copyrightsize}{\@setfontsize\copyrightsize{8}{10}}
 
 \newcommand{\dhpversesize}{\@setfontsize\dhpversesize{12}{15.5}}
 \newcommand{\chapnamesize}{\@setfontsize\chapnamesize{22}{24}}

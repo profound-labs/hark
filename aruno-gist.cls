@@ -11,7 +11,7 @@
 % ==============
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{aruno-gist}[2013/03/21 v0.01 A document class for small booklets or quote collections.]
+\ProvidesClass{aruno-gist}[2013/03/21 v0.1 A document class for small booklets or quote collections.]
 
 % ========================
 % Preliminary Declarations

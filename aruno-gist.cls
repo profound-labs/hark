@@ -11,55 +11,74 @@
 % ==============
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{aruno-gist}[2013/03/21 v0.1 A document class for small booklets or quote collections.]
+\ProvidesClass{aruno-gist}[2013/04/13 v0.2 A document class for small booklets or quote collections.]
 
 % ========================
 % Preliminary Declarations
 % ========================
 
+\RequirePackage[british]{babel}
+
 % =======
 % Options
 % =======
+
+\RequirePackage{pgfopts}
+\RequirePackage{calc}
+
+\pgfkeys{
+  /GIST/.cd,
+  textType/.default=prose,% prose / quoteAndComment
+  textType/.store in=\GIST@textType,
+}
+
+% Pass all unknown options to memoir
+\DeclareOption*{%
+  \PassOptionsToClass{\CurrentOption}{memoir}
+}
+
+\ProcessPgfOptions{/GIST}
+\ProcessOptions\relax
 
 % ======================
 % All Other Declarations
 % ======================
 
-\LoadClass[11pt,twoside,final]{memoir}
+\LoadClass[11pt,twoside]{memoir}
 
-\usepackage{nag}
-\usepackage{calc}
-\usepackage{xparse}
-\usepackage{soul}
-\usepackage{textcomp}
-%\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage[cmyk]{xcolor}
+\RequirePackage{nag}
+\RequirePackage{xparse}
+\RequirePackage{soul}
+\RequirePackage{textcomp}
+\RequirePackage{longtable}
+\RequirePackage[cmyk]{xcolor}
 
-\usepackage[pdftex]{graphicx}
+\RequirePackage{graphicx}
 \graphicspath{{./src-images/}}
-\usepackage{eso-pic}
-\usepackage{ccicons}
-\usepackage{enumitem}
+\RequirePackage{eso-pic}
+\RequirePackage{ccicons}
+\RequirePackage{ifthen}
+\RequirePackage{enumitem}
 
-\usepackage{tikz}
+\RequirePackage{tikz}
 
-%% === Define colors ===================================================
+% === Define colors ===
 
 \definecolor{textbody}{gray}{0.05}
 \definecolor{drop}{gray}{0.7}
 \definecolor{capsline}{gray}{0.3}
 \definecolor{chapnum}{gray}{0.8}
 \definecolor{chaptitle}{gray}{0.3}
-% \definecolor{chapsubtitle}{gray}{0.6}
 \definecolor{footnoterule}{gray}{0.5}
 
-%% ============================
-%% Load fonts (before multicol)
-%% ============================
+% === Load fonts ===
 
-\usepackage{fontspec}
+\RequirePackage{fontspec}
 \defaultfontfeatures{Ligatures={TeX},Renderer={Basic}}
+
+% If -- dashes don't work for your font, try
+% Renderer = Basic
+% http://tex.stackexchange.com/questions/20580/how-to-enable-ligatures-for-emdash-endash-in-luatex
 
 \setmainfont[ItalicFont = Shaker 2 Light Italic,]{Shaker 2 Light}
 
@@ -107,26 +126,27 @@
 
 \newcommand{\sectiontitlesize}{\@setfontsize\sectiontitlesize{11.5}{18}}
 
-%% ==============================
-%% Packages that come AFTER fonts
-%% ==============================
+% === Page geometry and layout ===
 
-\usepackage{multicol}
+% Symbols used:
+% P = page proportion (h/w)
+% T = textblock proportion (d/m)
+% w = paper width
+% h = paper height
+% m = text width
+% d = text height
 
-\usepackage{lettrine}
+% P = 1.125, 8:9, major 2nd
+% T = ? 1.067 15:16, minor 2nd
+% ? 1.082, Tall Cross Octagon
+% ? 1.051, Turned Pentagon
+% 100/x
+% 95/88
 
-\setcounter{DefaultLines}{3}
-\renewcommand{\DefaultLoversize}{0.15}
-\renewcommand{\DefaultLraise}{0}
-\renewcommand{\DefaultLhang}{0.4}
-\renewcommand{\LettrineFontHook}{\dropFont\color{drop}}
-\renewcommand{\LettrineTextFont}{\scshape\color{capsline}}
+% prose: e = 18mm, t=15mm, f=23mm, ht=7mm, hs=7mm, he=6mm, hw=23mm
+% verses w/ reflections: center v h
 
-%% ============================
-%% Set page geometry and layout
-%% ============================
-
-\usepackage{geometry}
+\RequirePackage{geometry}
 \geometry{
 paperwidth=135mm,
 paperheight=120mm,
@@ -176,7 +196,7 @@ outer=15mm
 %% Penalties
 %% =========
 
-\usepackage{nowidow}
+\RequirePackage{nowidow}
 
 % \parfillskip 0pt plus 0.8\textwidth
 
@@ -454,9 +474,9 @@ outer=15mm
 %% Packages to be loaded LAST
 %% ==========================
 
-\usepackage[perpage,multiple,stable]{footmisc}
+\RequirePackage[perpage,multiple,stable]{footmisc}
 
-\usepackage[final,babel=true]{microtype}
+\RequirePackage[final,babel=true]{microtype}
 
 %% =================
 %% PDF/X-3:2002 info
